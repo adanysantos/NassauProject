@@ -26,9 +26,9 @@ Nassau Project (TCC) by Development Group.
 
 - This project was created utilizing.
 
-- Compatível com alguns navegadores como Chrome, Opera e Firefox.
-
 - PHP, JavaScript, SQL. 
+
+- Compatível com alguns navegadores como Chrome, Opera e Firefox.
 
 - The project can be started easily with a Link git clone in a repository
   On windows HTDOCS with Xampp and / VAR / WWW / HTML On Ubuntu, both with apache and mysql properly installed https://github.com/lvneto/NassauProject
