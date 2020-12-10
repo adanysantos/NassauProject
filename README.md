@@ -35,3 +35,6 @@ Nassau Project (TCC) by Development Group.
   NOTE: The use of PHPmyadmin is optional.
 
 - Creating the database that is already allocated within the project (Don't forget to change the password in the model / conexao.php class).
+
+
+https://camo.githubusercontent.com/35491377da45ee7e2d429323355efc6040dc93cfbab2f81a0a047d269f7901c3/68747470733a2f2f6d65646961332e67697068792e636f6d2f6d656469612f3675476854314f3473787069382f736f757263652e676966
