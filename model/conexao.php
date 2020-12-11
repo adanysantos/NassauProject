@@ -5,7 +5,7 @@ session_start();
 
         $dsn = 'mysql:host=localhost;dbname=sysfacul;charset=utf8';
         $usuario = 'root';
-        $senha = 'Pgepa@2020';
+        $senha = '';
 
         global $pdo;
 

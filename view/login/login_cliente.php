@@ -46,14 +46,8 @@
                <input type="password" name="senha" id="inputSenha" class="form-control" placeholder="Insira sua senha" required>
                 </div>
         </div>
-            <!-- <i class="fas fa-user"></i><p>Usuário</p>
-            <input type="text" name="email" placeholder="Insira seu e-mail"> -->
-            <!-- <p>Senha</p>
-            <input type="password" name="senha" placeholder="Insira sua senha"> -->
-            <input type="submit" name="" value="Login">
-            <a href="esqueciminhasenha.php">Esqueceu sua senha?</a><br>
-            <a href="#">Ainda não possui uma conta?</a>
-
+           
+        <input type="submit" name="" value="Login">
         </form>
 
 
@@ -61,15 +55,7 @@
 
     <!-- Exibe mensagem de erro -->
     <div class="col-6 alerta">
-        <p class="text-center  alert-danger">
-            <?php
-            if(isset($_SESSION['loginErro'])){
-                echo $_SESSION['loginErro'];
-                unset($_SESSION['loginErro']);
-            }
-
-            ?>
-        </p>
+        
     </div>
         
 </body>

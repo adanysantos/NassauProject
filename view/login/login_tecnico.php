@@ -27,7 +27,7 @@
         <img src="../../img/usuario.png" class="usuario" width="100" height="100" alt="">
         <h1>Login</h1>
         <h5>TÉCNICO</h5>
-        <form method="POST" action="../../controller/valida_Tecnico.php">
+        <form method="POST" action="../../controller/validaTecnico.php">
         <div class="form-group">
              <p>Nome</p>
                <div class="input-group">

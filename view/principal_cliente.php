@@ -1,5 +1,6 @@
 <?php
 include '../model/conexao.php';
+include_once ("../controller/funcoes.php");
 
 if(isset($_SESSION['idCliente']) && !empty($_SESSION['idCliente'])):
 ?>
@@ -150,7 +151,7 @@ function ExibeConteudo(n) {
               <h1 class="h3 mb-3 font-weight-normal">Abrir Chamado</h1>
             </div>
             <hr>
-            <form method="POST" action="../abrir_chamado_cliente.php">
+            <form method="POST" action="../controller/abrirChamado_cliente.php">
               <div class="form-row">
               <div class="form-group col-md-12">
                   <label for="inputEmail4">Nome</label>
@@ -158,7 +159,7 @@ function ExibeConteudo(n) {
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                     </div>
-                    <input type="text" name="nome" id="inputNome" class="form-control" placeholder="<?php echo $_SESSION['nomeCliente']?>" disabled>
+                    <input type="text" name="nome" id="inputNome" class="form-control" placeholder="<?php echo  $_SESSION['nomeCliente'];?>" disabled>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -167,7 +168,7 @@ function ExibeConteudo(n) {
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge"></i></span>
                     </div>
-                    <input type="text" name="nome_empresa" id="inputEmpresa" class="form-control" placeholder="<?php echo $_SESSION['clienteEmpresa']?>" disabled>
+                    <input type="text" name="nome_empresa" id="inputEmpresa" class="form-control" placeholder="<?php echo  $_SESSION['empresaCliente'];?>" disabled>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -176,7 +177,7 @@ function ExibeConteudo(n) {
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-mobile-alt"></i></span>
                     </div>
-                    <input type="text" name="setor" id="inputSetor" class="form-control" placeholder="<?php echo $_SESSION['setorCliente']?>" disabled>
+                    <input type="text" name="setor" id="inputSetor" class="form-control" placeholder="<?php echo $_SESSION['setorCliente'];?>" disabled>
                   </div>
 
                 </div> 
@@ -275,62 +276,7 @@ function ExibeConteudo(n) {
             </div>
             <hr>
             <?php
-            //Consulta no banco
-            $email_cliente = $_SESSION['clienteEmail'];
-              // $resultado = "SELECT c.idChamado,c.data_abertura, c.tipo_servico, c.desc_problema, c.estado, tec.nome FROM chamado c JOIN tecnico tec ON c.idTecnico = tec.idTecnico";
-              $resultado = "SELECT c.idChamado,c.data_abertura, c.idCliente, c.tipo_servico, c.desc_problema, c.estado, c.prioridade,tec.nome_tecnico, cli.nome, cli.nome_empresa, cli.setor FROM chamado c INNER JOIN tecnico tec  ON c.idTecnico = tec.idTecnico INNER JOIN cliente cli ON c.idCliente = cli.idCliente where cli.email = '$email_cliente'";
-              $resultado_chamado = mysqli_query($conn, $resultado);
-            //  $result_chamado = "SELECT c.idChamado,c.data_abertura, c.tipo_servico, c.desc_problema, c.estado tec.nome FROM chamado c JOIN tecnico tec ON c.idTecnico = tec.idTecnico";
-            //  $resultado_chamado_join = mysqli_query($conn, $result_chamado);
-            // while( $linha_join = mysqli_fetch_assoc($resultado_chamado_join)){  
-             //     $varia = $linha_join['nome'];
-            //     }
-            
-            
-            ?>
-            <table class="table table-striped">
-            <thead class="tabela">
-            <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Criado em</th>
-            <th scope="col">Produto</th>
-            <th scope="col">Técnico</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Status</th>
-            
-            </tr>
-            </thead>  
-            <tbody>
-            <?php
-            
-              while($linha_chamado = mysqli_fetch_assoc($resultado_chamado)){
-                
-            ?>    
-                <tr>
-                  <th scope="col">#<?php echo $linha_chamado['idChamado'];?></th>
-                  <th scope="col"><?php echo $linha_chamado['data_abertura'];?></th>
-                  <th scope="col"><?php echo $linha_chamado['tipo_servico'];?></th>
-                  <th scope="col"><?php echo $linha_chamado['nome_tecnico'] ?></th>
-                  <th scope="col"><?php echo $linha_chamado['desc_problema'];?></th>
-                  <th scope="col" class="alert">
-                  <?php 
-                  if ($linha_chamado['estado'] === "Aberto") {?>
-                      <span class="alert-danger"><?php echo $linha_chamado['estado'];?></span></th>
-                 <?php     
-                  } elseif ($linha_chamado['estado'] === "Em andamento") {?>
-                     <span class="alert-warning"><?php echo $linha_chamado['estado'];?></span></th>
-                 <?php   
-                  } elseif ($linha_chamado['estado'] === "Fechado") {?>
-                      <span class="alert-success"><?php echo $linha_chamado['estado'];?></span></th>
-                  <?php    
-                  }
-                  
-                  ?>
-                  <!--<span class="alert-warning"><?php echo $linha_chamado['estado'];?></span></th>-->
-                </tr>
-            <?php
-              }
-            
+            exibeChamadoCliente();
             ?>
             </tbody>
             </table> 

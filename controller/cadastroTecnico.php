@@ -10,8 +10,7 @@ if(isset($_POST['nome']) && !empty($_POST['nome']) && isset($_POST['email']) && 
 
     $nome_tec = addslashes($_POST['nome']);
     $email_tec = addslashes($_POST['email']);
-    $senha_tec = md5(addslashes($_POST['senha']));
-   // $senha_tec = md5($senha_tec);
+    $senha_tec = addslashes(md5($_POST['senha']));
     $cpf_tec = addslashes($_POST['cpf']);
     $telefone_tec = addslashes($_POST['telefone']);
     $area_atuacao_tec = addslashes($_POST['area_atuacao']);

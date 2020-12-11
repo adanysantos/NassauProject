@@ -94,13 +94,7 @@ label{
         <li><a onclick="ExibeConteudo(1)"><i class="fas fa-blog"></i>Painel</a></li>
       </ul>
       <div class="redes_sociais">
-        <!-- <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a> -->
-        <!-- <footer class="footer">
-          <p align="ritgh">Copyright &copy; 2020 - Desenvolvido pela <strong>Equipe de Desenolvimento - SI</strong> - Todos os direitos reservados.
-              </p> 
-        </footer>  -->
+      
       </div>
     </div>
 
@@ -219,7 +213,7 @@ function ExibeConteudo(n) {
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-mobile-alt"></i></span>
                     </div>
-                    <input type="text" name="telefone" id="inputTelefone" class="form-control" placeholder="(DDD) XXXXX-XXXX" require>
+                    <input type="text" name="telefone" id="inputTelefone" class="form-control" placeholder="(DDD) XXXXX-XXXX" maxlength="12" require>
                   </div>
 
                 </div>
@@ -307,7 +301,7 @@ function ExibeConteudo(n) {
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge"></i></span>
                     </div>
-                    <input type="number" name="cpf" id="inputCpf"  class="form-control" placeholder="CPF" maxlength="11" require>
+                    <input type="text" name="cpf" id="inputCpf"  class="form-control" maxlength="11"  placeholder="CPF" require>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -316,7 +310,7 @@ function ExibeConteudo(n) {
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-mobile-alt"></i></span>
                     </div>
-                    <input type="text" name="telefone" id="inputTelefone" class="form-control" placeholder="Telefone" maxlength="12" require>
+                    <input type="text" name="telefone" id="inputTelefone" class="form-control" placeholder="(DDD) XXXXX-XXXX" maxlength="12" require>
                   </div>
 
                 </div>
@@ -420,7 +414,7 @@ function ExibeConteudo(n) {
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge"></i></span>
                     </div>
-                    <input type="text" name="cpf" id="inputCpf" class="form-control" placeholder="CPF" require>
+                    <input type="text" name="cpf" id="inputCpf" class="form-control" placeholder="CPF" maxlength="11" require>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -429,7 +423,7 @@ function ExibeConteudo(n) {
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><i class="fas fa-mobile-alt"></i></span>
                     </div>
-                    <input type="text" name="telefone" id="inputTelefone" class="form-control" placeholder="Telefone" require>
+                    <input type="text" name="telefone" id="inputTelefone" class="form-control" placeholder="(DDD) XXXXX-XXXX" maxlength="11" require>
                   </div>
 
                 </div>

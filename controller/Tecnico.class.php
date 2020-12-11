@@ -16,6 +16,7 @@ class Tecnico{
 
             $_SESSION['idTecnico'] = $dado['idTecnico'];
             $_SESSION['nomeTecnico'] = $dado['nome_tecnico'];
+            $_SESSION['emailTecnico'] = $dado['email'];
 
             return true;
         }else{
@@ -31,6 +32,7 @@ class Tecnico{
         $nome_tec = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
         $email_tec = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
         $senha_tec = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
+        $senha_tec = md5($senha_tec);
         $cpf_tec = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
         $telefone_tec = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
         $area_atuacao_tec = filter_input(INPUT_POST, 'area_atuacao', FILTER_SANITIZE_STRING);
@@ -48,6 +50,23 @@ class Tecnico{
             echo "<script>
                 alert ('Técnico Cadastrado!');window.location.href='../view/principal_gestor2.php';        
                 </script>";
+        }
+
+    }
+    public function updateChamadoCTec($id_chamado, $novo_estado, $prioridade){
+
+        global $pdo;
+
+        $id_chamado =  filter_input(INPUT_POST, 'id_chamado', FILTER_SANITIZE_STRING);
+       // $novo_tec =  filter_input(INPUT_POST, 'novo_tec', FILTER_SANITIZE_STRING);
+        $novo_estado =  filter_input(INPUT_POST, 'estado_cham', FILTER_SANITIZE_STRING);
+        $prioridade =  filter_input(INPUT_POST, 'prioridade', FILTER_SANITIZE_STRING);
+
+        $sql = "UPDATE chamado SET prioridade = ?,  estado = ? WHERE idChamado = ?";
+        $stmt = $pdo->prepare($sql);
+
+        if($stmt->execute([$prioridade, $novo_tec, $novo_estado, $id_chamado])){
+            echo "<script>alert ('Chamado atualizado com sucesso!');window.location.href='../view/principal_tecnico.php';</script>";
         }
 
     }

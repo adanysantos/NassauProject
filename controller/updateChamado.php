@@ -2,7 +2,7 @@
 
 if ($_POST['estado_cham'] === 0 && $_POST['prioridade'] === 0){
     echo "<script>alert ('Selecione todos os campos!');window.location.href='../view/principal_gestor2.php';</script>";
-}else if($_POST['novo_tec'] === 0){
+}else if(isset($_POST['novo_tec'])){
     require '../model/conexao.php';
     require '../controller/Gestor.class.php';
 

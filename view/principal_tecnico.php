@@ -1,12 +1,11 @@
 <?php
 include '../model/conexao.php';
+include_once ("../controller/funcoes.php");
 
 if(isset($_SESSION['idTecnico']) && !empty($_SESSION['idTecnico'])):
 
 
-include_once("../consultaCliente.php");
-include_once("../controller/tecnico/painel_chamado.php");
-// include("../funcoes/encerraChamado.php");
+
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -78,13 +77,7 @@ include_once("../controller/tecnico/painel_chamado.php");
         <li><a href="#"><i class="fas fa-project-diagram"></i>Relatórios</a></li>
       </ul>
       <div class="redes_sociais">
-        <!-- <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a> -->
-        <footer class="footer">
-          <p align="ritgh">Copyright &copy; 2020 - Desenvolvido pela <strong>Equipe de Desenolvimento - SI</strong> - Todos os direitos reservados.
-              </p> 
-        </footer> 
+     
       </div>
     </div>
 
@@ -93,7 +86,7 @@ include_once("../controller/tecnico/painel_chamado.php");
       <div class="header alert alert-success">
         <i class="fas fa-user-tag "></i>
         <?php
-        echo "Bem-vindo, <strong>" . $_SESSION['tecnicoNome'] . "</strong>";
+        echo "Bem-vindo, <strong>" . $_SESSION['nomeTecnico'] . "</strong>";
         // echo consultaCliente();
         ?>
         <a type="button" class="btn btn_login float-right" href="../controller/logout_tecnico.php">Sair</a>
@@ -153,7 +146,7 @@ function ExibeConteudo(n) {
       campo.innerHTML = `<?php exibeChamado();?>`
     }
     if(n == 3){
-      campo.innerHTML = `<?php chamadosFechados();?>`
+      campo.innerHTML = `<?php //chamadosFechados();?>`
     }
 
 

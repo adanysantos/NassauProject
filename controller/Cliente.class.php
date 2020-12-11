@@ -16,6 +16,7 @@ class Cliente{
 
             $_SESSION['idCliente'] = $dado['idCliente'];
             $_SESSION['nomeCliente'] = $dado['nome'];
+            $_SESSION['emailCliente'] = $dado['email'];
             $_SESSION['empresaCliente'] = $dado['nome_empresa'];
             $_SESSION['setorCliente'] = $dado['setor'];
             return true;
@@ -34,6 +35,7 @@ class Cliente{
        $telefone_cliente=  filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
        $nome_empresa =  filter_input(INPUT_POST, 'nome_empresa', FILTER_SANITIZE_STRING);
        $setor_cliente =  filter_input(INPUT_POST, 'setor', FILTER_SANITIZE_STRING);
+       $senha_cliente = md5($senha_cliente);
 
         $sql = 'INSERT INTO cliente (nome, email, senha, telefone, nome_empresa, setor) VALUES (?, ?, ?, ?, ?, ?)';
         $sql = $pdo->prepare($sql);
@@ -50,6 +52,35 @@ class Cliente{
                 </script>";
             }
 
+    }
+    public function abrirChamadoCliente($cliente, $tipo_servico, $desc_problema, $estado, $tecnico, $data){
+
+        global $pdo;
+
+        $cliente = filter_input(INPUT_POST, 'cliente', FILTER_SANITIZE_STRING);
+        $tipo_servico = filter_input(INPUT_POST, 'tipo_servico', FILTER_SANITIZE_STRING);
+        $desc_problema = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+        $data = filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING);
+        $estado = "Aberto";
+        $tecnico = 99;
+       // $data =  date('Y/m/d');
+
+        $sql = 'INSERT INTO chamado (tipo_servico, data_abertura, idTecnico, estado,  desc_problema, idCliente) VALUES(?, ?, ?, ?, ?, ?)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(1, $tipo_servico);
+        $stmt->bindValue(2, $data);
+        $stmt->bindValue(3, $tecnico);
+        $stmt->bindValue(4, $estado);
+        $stmt->bindValue(5, $desc_problema);
+        $stmt->bindValue(6, $cliente);
+
+        if($stmt->execute()){
+            echo "<script>
+                alert ('Chamado cadastrado com sucesso!');window.location.href='../view/principal_cliente.php';        
+                </script>";
+        }
+
+        var_dump($stmt->errorInfo());
     }
 
 

@@ -218,8 +218,9 @@ function exibeChamadosModal() {
                   <th scope="col"><?php echo $linha_chamado['tipo_servico'];?></th>
                   <th scope="col">
                   <?php 
-                    if($linha_chamado['idTecnico'] === 99){
+                    if($linha_chamado['idTecnico'] == 99){
                       listaTecnicosSelect();
+                    //  echo 'teste';
                     }else{
                       echo $linha_chamado['nome_tecnico'];
                   }
@@ -298,4 +299,147 @@ function exibeChamadosModal() {
 
 <?php
 }
+
+
+function exibeChamado(){
+$tecnico = $_SESSION['emailTecnico'];
+
+            $pdo = Conexao();
+            $consulta = $pdo->query("SELECT c.idChamado,c.data_abertura, c.idCliente, c.tipo_servico, c.desc_problema, c.estado, c.prioridade,tec.idTecnico, cli.nome, cli.nome_empresa, cli.setor FROM chamado c INNER JOIN tecnico tec  ON c.idTecnico = tec.idTecnico INNER JOIN cliente cli ON c.idCliente = cli.idCliente where tec.email = '$tecnico'");
+                        //Consulta no banco
+         //   $email_tecnico =  $_SESSION['emailTecnico'];
+
+             // $resultado = "SELECT c.idChamado,c.data_abertura, c.idCliente, c.tipo_servico, c.desc_problema, c.estado, c.prioridade,tec.idTecnico, cli.nome, cli.nome_empresa, cli.setor FROM chamado c INNER JOIN tecnico tec  ON c.idTecnico = tec.idTecnico INNER JOIN cliente cli ON c.idCliente = cli.idCliente where tec.email = '$email_tecnico'";
+             // $resultado_chamado = mysqli_query($conn, $resultado);
+
+            
+            
 ?>
+            <table class="table table-striped">
+            <thead class="tabela">
+            <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Criado em</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Setor</th>
+            <th scope="col">Produto</th>
+            <th scope="col">Status</th>
+            <th scope="col">Prioridade</th>
+            <th scope="col">Ações</th>
+            
+            </tr>
+            </thead>  
+            <tbody>
+            <?php
+            
+              while($linha_chamado = $consulta->fetch(PDO::FETCH_ASSOC)){
+                
+            ?>    
+                <tr>
+                <form method="POST" action="../encerraChamado.php">
+                <input type="hidden" name="id_chamado" value="<?php echo $linha_chamado['idChamado']; ?>">
+                  <th scope="col">#<?php echo $linha_chamado['idChamado'];?></th>
+                  <th scope="col"><?php echo $linha_chamado['data_abertura'];?></th>
+                  <th scope="col"><?php echo $linha_chamado['nome'];?></th>
+                  <th scope="col"><?php echo $linha_chamado['nome_empresa'];?></th>
+                  <th scope="col"><?php echo $linha_chamado['setor'];?></th>
+                  <th scope="col"><?php echo $linha_chamado['desc_problema'];?></th>
+                  <th scope="col" class="alert">
+                  <?php 
+                  if ($linha_chamado['estado'] === "Aberto") {?>
+                      <span class="alert-danger"><?php echo $linha_chamado['estado'];?></span></th>
+                 <?php     
+                  } elseif ($linha_chamado['estado'] === "Em andamento") {?>
+                     <span class="alert-warning"><?php echo $linha_chamado['estado'];?></span></th>
+                 <?php   
+                  } elseif ($linha_chamado['estado'] === "Fechado") {?>
+                      <span class="alert-success"><?php echo $linha_chamado['estado'];?></span></th>
+                  <?php    
+                  }
+                  
+                  ?>
+                  </th>
+                  <th scope="col"><?php echo $linha_chamado['prioridade'];?></th>
+                  <th scope="col">
+                  <?php
+                  if($linha_chamado['estado'] === "Fechado"){
+
+                  }else{?>
+                    <a href="editaChamados.php" style="color:#4b4276";><i class="fas fa-edit" style="color:#4b4276";></i></a>
+                  <?php  
+                  }
+                  ?>
+                  
+                 </th>
+                </tr>
+            <?php
+              }
+            
+            ?>
+            </tbody>
+            </table> 
+          </div>
+<?php
+}
+
+
+function exibeChamadoCliente(){
+$cliente = $_SESSION['emailCliente']; 
+
+$pdo = Conexao();
+$consulta = $pdo->query("SELECT c.idChamado,c.data_abertura, c.idCliente, c.tipo_servico, c.desc_problema, c.estado, c.prioridade,tec.nome_tecnico, cli.nome, cli.nome_empresa, cli.setor FROM chamado c INNER JOIN tecnico tec  ON c.idTecnico = tec.idTecnico INNER JOIN cliente cli ON c.idCliente = cli.idCliente where cli.email = '$cliente'");
+
+
+
+
+?>
+<table class="table table-striped">
+            <thead class="tabela">
+            <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Criado em</th>
+            <th scope="col">Produto</th>
+            <th scope="col">Técnico</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Status</th>
+            
+            </tr>
+            </thead>  
+            <tbody>
+            <?php
+            
+              while($linha_chamado = $consulta->fetch(PDO::FETCH_ASSOC)){
+                
+            ?>    
+                <tr>
+                  <th scope="col">#<?php echo $linha_chamado['idChamado'];?></th>
+                  <th scope="col"><?php echo $linha_chamado['data_abertura'];?></th>
+                  <th scope="col"><?php echo $linha_chamado['tipo_servico'];?></th>
+                  <th scope="col"><?php echo $linha_chamado['nome_tecnico'] ?></th>
+                  <th scope="col"><?php echo $linha_chamado['desc_problema'];?></th>
+                  <th scope="col" class="alert">
+                  <?php 
+                  if ($linha_chamado['estado'] === "Aberto") {?>
+                      <span class="alert-danger"><?php echo $linha_chamado['estado'];?></span></th>
+                 <?php     
+                  } elseif ($linha_chamado['estado'] === "Em andamento") {?>
+                     <span class="alert-warning"><?php echo $linha_chamado['estado'];?></span></th>
+                 <?php   
+                  } elseif ($linha_chamado['estado'] === "Fechado") {?>
+                      <span class="alert-success"><?php echo $linha_chamado['estado'];?></span></th>
+                  <?php    
+                  }
+                  
+                  ?>
+                  <!--<span class="alert-warning"><?php echo $linha_chamado['estado'];?></span></th>-->
+                </tr>
+            <?php
+              }
+            
+            ?>
+            </tbody>
+            </table> 
+</div>
+<?php
+}
